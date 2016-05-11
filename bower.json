@@ -1,0 +1,14 @@
+{
+  "name": "Shopping",
+  "description": "An online shopping web application for Software Engineeerning, Spring semester 2016, PKU.",
+  "homepage": "https://github.com/DuoShouDang/Shopping",
+  "license": "MIT",
+  "version": "0.1.0",
+  "dependencies": {
+    "angular": "1.4.1",
+    "angular-loader": "1.4.1",
+    "angular-mocks": "1.4.1",
+    "angular-sanitize": "1.4.1",
+    "angular-ui-router": "~0.2.15"
+  }
+}
