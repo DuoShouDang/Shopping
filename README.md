@@ -9,7 +9,6 @@
 ```
 $ npm install -g bower
 ```
-
 * Karma (Optional) - used for testing
 
 ```
@@ -18,56 +17,83 @@ $ npm install -g karma
 
 ## 安装
 
-
-Clone this repository to your folder.
+Clone this repository.
 
 ```
 $ git clone https://github.com/DuoShouDang/Shopping.git
-
 ```
-Download npm and bower packages
+Download npm and bower packages.
 
 ```
 npm install
 ```
 
-Perform the build operations using Gulp:
+Build the project: *(clean project; 合并且minify css, js文件；依赖注入)*
 
 ```
 $ npm run build       # Builds for production
 $ npm run build-dev   # Builds for development
 ```
 
-Serve the application using Browsersync: *(for development purposes)*
+Serve the application using Browsersync: *(仅供静态页面调试)*  
+执行后应在浏览器中自动打开`index.html`; 如果没有，则访问localhost:3000即可。  
+实时监测文件变化并在文件内容改变时重新build、重启服务器刷新页面。**执行start之前不需要手动执行build.**
 
 ```
 $ npm run start       # Serves the production build
 $ npm run start-dev   # Serves the development build
 ```
 
-Run unit tests using Karma:
+Run unit tests using Karma: *(没有做过并不知道这是啥)*
 
 ```
 $ npm run test-unit
 ```
 
-###其它
+### 关于Gulp
+
+`gulpfile.js`中定义了一些任务；可以查看任务并执行
+
+```
+$ npm run gulp task:name
+```
+
+如只clean项目则可以`npm run gulp clean`。
+用npm run定义或查看执行任务的详情时，可看`package.json`。例如，可以看到
+
+```
+"scripts": {
+    "build": "npm run gulp prebuild; npm run gulp build",
+    ...
+}
+```
+
+定义了`npm run build`任务实际执行
+
+```
+$ npm run gulp prebuild  
+$ npm run gulp build
+```
+
+### 其它
 
 可能的报错：安装phantomJS出错   
 （大绿🐍的）解决方案：
 
 ```
 export PHANTOMJS_CDNURL=http://cnpmjs.org/downloads
-npm install -g phantomjs
+npm install -g phantomjs-prebuilt
 ```
 
-`npm install`后自动执行`bower install`。若此步骤出错可以手动执行
+`npm install`后自动执行`bower install`。若此步骤或之前步骤出错可以手动执行：
 
 ```
 bower install --allow-root
 ```
 
-安装过程中出现的其他问题请移至issues.
+依赖包应该安装在src/assets/vendors目录下面。
+
+**安装过程中出现的其他问题请移至issues.**
 
 
 ## 前端说明
@@ -98,12 +124,11 @@ bower install --allow-root
 │   ├── assets                         # 非JS文件和第三方文件
 │   │   ├── images                     # 图片
 │   │   ├── stylesheets                # LESS, CSS文件
-│   │   ├── lib                        # 第三方库
 │   │   └── vendor                     # 第三方库
 │   │       ├── angular                # AngularJS
 │   │       └── ...
 │   ├── build                          # Minified JS&CSS
-│   └── layout                         # 部分HTML文件（定义网站layout）
+│   └── layout                         # 定义网站全局layout的HTML模版
 ├── tests                              # 测试代码
 │   └── e2e                            # End-to-end
 ├── .bowerrc                           # Bower配置文件
@@ -120,7 +145,7 @@ bower install --allow-root
 ├── gulpfile.js                        # Gulp tasks文件
 ├── karma.conf.js                      # Karma单元测试配置文件
 ├── package.json                       # 定义Node.js依赖包
-└── protractor.conf.js 
+└── protractor.conf.js                 # 这玩意我也没用过
 ```
 
 ### 模块结构
@@ -137,18 +162,23 @@ src/app/modules/home/
 │   └── another-example.home.view.html
 ├── config                             # 模块配置
 │   ├── home.route.js                  # 路径定义
-│   ├── home.menus.js                  # (可选) 添加至导航栏
+│   ├── home.menus.js                  # (以后开发阶段可选) 添加至导航栏
 │   └── home.spec.js                   # 单元测试
 └── home.module.js                     # 模块定义
 
 ```
+
+### 样式
+
+样式表文件均在`src/assets/stylesheets`，拟写LESS文件，再将其编译成CSS.   
+自动编译LESS的逻辑尚未实现（说白就是懒）\_(:з」∠)\_
 
 ### 其它
 
 **重要!!!**  
 引入依赖包时，在bower.json或package.json中添加相应说明：
 
-bower.js
+bower.json
 
 ```
 "dependencies": {
@@ -166,6 +196,6 @@ package.json
 }
 ```
 
-如果需要引入的第三方库或插件不在bower或npm上，复制粘贴到`src/app/assets/lib/`即可。`node_modules/`和`src/app/assets/vendor`**不会被git索引！**
+`node_modules/`和`src/app/assets/vendor`**不会被git索引！**前端开发人员自行负责维护`bower.json`和`package.json`中的内容，并在文件内容有修改时自行用npm或bower在本地添加相应的依赖包。
 
-
+第三方文件尽量使用bower或npm上已有的；如以后需要用到不支持bower或npm的代码或服务就再说。。

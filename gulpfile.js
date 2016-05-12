@@ -10,6 +10,10 @@ var del = require('del');
 var mainBowerFiles = require('main-bower-files');
 var series = require('stream-series');
 
+gulp.task('gulp:test', function(){
+  console.log('Hello world');
+});
+
 gulp.task('clean', function (next) {
   del(getPath('build', '*.{css,js}'), next);
 });
@@ -51,6 +55,7 @@ gulp.task('js:deps', function () {
     }
   }))
   .pipe(plugins.concat(config.js.vendor.bundle))
+  .pipe(plugins.concat(config.js.vendor.bundle))
   .pipe(plugins.uglify({mangle: true}))
   .pipe(gulp.dest(config.path.build));
 });
@@ -90,8 +95,10 @@ gulp.task('js', ['js:style', 'js:lint', 'js:deps'], function () {
   .pipe(gulp.dest(config.path.build));
 });
 
-gulp.task('inject', ['clean', 'css', 'js', 'html'], function () {
+gulp.task('prebuild', ['clean', 'css', 'js', 'html']);
+gulp.task('prebuild:dev', ['clean', 'css', 'js:deps']);
 
+gulp.task('inject', function () {
   var files = {
     css: gulp.src(getPath('build', config.css.bundle), {read: false}),
     js: gulp.src(getPath('build', [
@@ -112,7 +119,7 @@ gulp.task('inject', ['clean', 'css', 'js', 'html'], function () {
   .pipe(gulp.dest(config.path.src));
 });
 
-gulp.task('inject:dev', ['clean', 'css', 'js'], function () {
+gulp.task('inject:dev', function () {
 
   var appFiles = getPath('app', config.js.files);
   var vendorFiles = mainBowerFiles({
@@ -143,8 +150,8 @@ gulp.task('inject:dev', ['clean', 'css', 'js'], function () {
   .pipe(gulp.dest(config.path.src));
 });
 
-gulp.task('build', ['clean', 'css', 'js', 'html', 'inject']);
-gulp.task('build:dev', ['clean', 'css', 'js:deps', 'inject:dev']);
+gulp.task('build', ['inject']);
+gulp.task('build:dev', ['inject:dev']);
 gulp.task('build:test', ['build', 'js:deps:test']);
 
 gulp.task('serve', ['build'], function () {
@@ -168,8 +175,6 @@ gulp.task('serve:dev', ['build:dev'], function () {
     server: config.path.src,
     startPath: '/index-dev.html'
   });
-  
-  console.log(123123123);
 
   gulp.watch(getPath('src', config.css.files), ['css']);
   gulp.watch(getPath('src', config.html.index.tpl), ['inject:dev']);

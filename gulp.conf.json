@@ -33,6 +33,7 @@
   "jscs": {
     "files": [
       "src/app/**/*.js",
+      "src/assets/lib/**/*.js",
       "tests/**/*.js"
     ]
   },
