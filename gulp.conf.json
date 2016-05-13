@@ -1,0 +1,59 @@
+{
+  "path": {
+    "app": "./src/app/",
+    "build": "./src/build/",
+    "src": "./src/",
+    "tests": "./tests/"
+  },
+  "css": {
+    "bundle": "app.min.css",
+    "files": [
+      "assets/stylesheets/*.css",
+      "assets/vendor/**/*.min.css"
+    ]
+  },
+  "html": {
+    "bundle": "templates.min.js",
+    "files": "modules/**/*.html",
+    "index": {
+      "dev": "index-dev.html",
+      "prod": "index.html",
+      "tpl": "index.tpl"
+    }
+  },
+  "js": {
+    "bundle": "app.min.js",
+    "files": [
+      "**/*.js",
+      "!**/*.spec.js"
+    ],
+    "vendor": {
+      "bundle": "dependencies.min.js"
+    }
+  },
+  "jscs": {
+    "files": [
+      "src/app/**/*.js",
+      "src/assets/lib/**/*.js",
+      "tests/**/*.js"
+    ]
+  },
+  "jshint": {
+    "config": ".jshintrc",
+    "files": [
+      "src/app/**/*.js",
+      "tests/**/*.js",
+      "*.js"
+    ]
+  },
+  "test": {
+    "specs": "**/*.spec.js",
+    "vendor": {
+      "bundle": "dependencies-test.min.js",
+      "packages": [
+        "angular-loader",
+        "angular-mocks"
+      ]
+    }
+  }
+}
