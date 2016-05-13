@@ -2,5 +2,5 @@
   'use strict';
 
   angular.module('templates', []);
-  angular.module('app.core', ['ngSanitize', 'templates', 'ui.router']);
+  angular.module('app.core', ['ngSanitize', 'templates', 'ui.router', 'ui.bootstrap']);
 })();

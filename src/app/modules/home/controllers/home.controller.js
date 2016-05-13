@@ -1,13 +1,13 @@
 (function () {
   'use strict';
 
-  angular.module('app.home').controller('Home', HomeController);
+  angular
+    .module('app.home')
+    .controller('HomeController', HomeController);
 
   function HomeController() {
     var vm = this;
     vm.heading = 'Hello World!';
-    vm.getHeading = function () {
-      return vm.heading;
-    };
+    vm.content = 'This is an example AngularJS seed by Big Green Snake. ';
   }
 })();

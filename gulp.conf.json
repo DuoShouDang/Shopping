@@ -8,7 +8,8 @@
   "css": {
     "bundle": "app.min.css",
     "files": [
-      "assets/stylesheets/app.css"
+      "assets/stylesheets/*.css",
+      "assets/vendor/**/*.min.css"
     ]
   },
   "html": {

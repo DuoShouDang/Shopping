@@ -3,7 +3,7 @@
   'use strict';
 
   angular.module('app.core').constant('config', {
-    appName: 'angular-boilerplate',
-    appVersion: '0.2.0'
+    appName: 'Shopping',
+    appVersion: '0.1.0'
   });
 });

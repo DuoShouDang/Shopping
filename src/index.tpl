@@ -20,9 +20,11 @@
   <!-- endinject -->
 </head>
 <body  class="ng-cloak">
-  <section ui-view>
+  <header ng-include="'app/modules/home/views/header.view.html'" class="navbar navbar-fixed-top"></header>
+  <section id="content" ui-view>
     <!-- App content here -->
   </section>
+  <footer ng-include="'app/modules/home/views/footer.view.html'" class="container"></footer>
   <!-- inject:js -->
   <!-- endinject -->
 </body>

@@ -2,3 +2,9 @@ html,
 body {
     font-family: Arial, sans-serif;
 }
+#content {
+  margin-top: 50px;
+}
+.icon-bar {
+  color: #337ab7;
+}
