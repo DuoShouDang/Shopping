@@ -6,6 +6,8 @@
  * Date: 16/5/16
  * Time: 下午1:01
  */
+require_once "../request_and_respond/DSDRequestResponder.php";
+
 class DSDRequestHandler{
     static function handleRequest(){
         $action=@$_GET["action"];
