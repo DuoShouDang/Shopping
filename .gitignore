@@ -1,3 +1,6 @@
+<<<<<<< HEAD
+.idea/*
+=======
 # OS
 # ===========
 .DS_Store
@@ -61,3 +64,4 @@ local.properties
 # Back end
 # ========
 /api/config/*
+>>>>>>> DuoShouDang/master
