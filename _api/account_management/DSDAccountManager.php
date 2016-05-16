@@ -9,11 +9,8 @@
 require_once "../data_management/DSDDatabaseConnector.php";
 require_once "../utils/Utils.php";
 class DSDAccountManager {
-    const COMPANY="company";
-    const INDIVIDUAL="individual";
-    const SUB="sub";
-    const LAWYER="lawyer";
-    const SECRETARY="secretary";
+    const USER="user";
+    const ADMIN="admin";
 
     static function addAccount($username, $email, $type){
         $res=DSDDatabaseConnector::get_first_match("select valid,user_id from users where email=:email", array(":email"=>$email));
