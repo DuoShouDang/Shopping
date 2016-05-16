@@ -1,1 +1,67 @@
+<<<<<<< HEAD
 .idea/*
+=======
+# OS
+# ===========
+.DS_Store
+ehthumbs.db
+Icon?
+Thumbs.db
+
+
+# Node, bower and related ecosystem
+# ==========================
+node_modules/
+npm-debug.log
+src/assets/vendor/
+
+
+# App build
+# =========
+src/build/
+src/index.html
+src/index-dev.html
+
+# General
+# =======
+*.log
+*.dat
+*.out
+*.pid
+*.gz
+*.tmp
+*.bak
+*.swp
+logs/
+
+# Editors
+# =======
+.sublime-project
+*.sublime-project
+*.sublime-workspace
+
+# Eclipse project files
+# =====================
+.project
+.settings/
+.*.md.html
+.metadata
+*~.nib
+local.properties
+
+# IntelliJ
+# ========
+*.iml
+.idea/
+
+# Visual Studio
+# =========
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Back end
+# ========
+/api/config/*
+>>>>>>> DuoShouDang/master
