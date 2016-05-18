@@ -16,7 +16,10 @@
         controller: 'AboutController',
         controllerAs: 'vm',
         templateUrl: 'app/modules/about/views/about.view.html',
-        url: '/about'
+        url: '/about',
+        data: {
+          pageTitle: 'About us'
+        }
       });
   }
 })();
