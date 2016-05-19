@@ -11,6 +11,11 @@
   function AboutController() {
     var vm = this;
     vm.content = 'Can you see this?';
+    vm.alert = customAlert;
+
+    function customAlert() {
+      alert('Hello!!!');
+    }
 
   }
 })();
