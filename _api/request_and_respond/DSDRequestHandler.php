@@ -34,6 +34,15 @@ class DSDRequestHandler{
             }
             require_once $classFilePath;
             $class = new ReflectionClass($classname);
+
+            if(file_exists("routers.json")){
+                $paths=json_decode(file_get_contents("routers.json"), true);
+            }else{
+                $paths=[];
+            }
+            foreach($paths as $one){
+
+            }
             $remains=substr($action, $index+1);
             $functionName="";
             $shouldCapital=false;
