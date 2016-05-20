@@ -91,6 +91,10 @@ class DSDDatabaseConnector {
         else return $res;
     }
 
+    static function exists($statement, $paras){
+        return self::get_first_match($statement, $paras)?true:false;
+    }
+
     static function insert($table, $kv, $debug=false){
         $excute=array();
         $fakekeys=array();

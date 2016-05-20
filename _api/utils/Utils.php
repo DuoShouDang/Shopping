@@ -6,6 +6,9 @@
  * Date: 16/1/20
  * Time: 下午10:54
  */
+
+require_once "../request_and_respond/DSDRequestResponder.php";
+
 class Utils {
     static function createRandom($num){
         $saltstr="qwertyuiopasdfghjklzxcvbnm1234567890QWERTYUIOPASDFGHJKLZXCVBNM";
@@ -14,6 +17,13 @@ class Utils {
             $salt=$salt. substr($saltstr, rand(0, strlen($saltstr)-1),1);
         }
         return $salt;
+    }
+    public static function ensureKeys($array, $keys){
+        foreach($keys as $one){
+            if(!isset($array[$one])){
+                DSDRequestResponder::respond(false, "缺少必要参数: ".$one);
+            }
+        }
     }
     public static function format_time($timestamp, $force_date=false){
         if($force_date) return date("Y-m-d H:i:s",$timestamp);
@@ -83,34 +93,16 @@ class Utils {
     static function filter($obj, $keys){
         $ans=array();
         foreach($keys as $key){
+            if(substr($key, strlen($key)-1, 1)=="!"){
+                $key=substr($key, 0, strlen($key)-1);
+                if(!isset($obj[$key])) DSDRequestResponder::respond(false, "缺少必要参数: ".$key);
+            }
             if(@$obj[$key]) $ans[$key]=$obj[$key];
         }
         return $ans;
     }
     static function plainTextOfHTML($html){
         return preg_replace('/<[^>]+>|&nbsp;/', '', $html);
-    }
-
-    static function getPdfPages($path){
-        if(!file_exists($path)) return array(false,"文件\"{$path}\"不存在！");
-        if(!is_readable($path)) return array(false,"文件\"{$path}\"不可读！");
-        // 打开文件
-        $fp=@fopen($path,"r");
-        if (!$fp) {
-            return array(false,"打开文件\"{$path}\"失败");
-        }else {
-            $max=0;
-            while(!feof($fp)) {
-                $line = fgets($fp,255);
-                if (preg_match('/\/Count [0-9]+/', $line, $matches)){
-                    preg_match('/[0-9]+/',$matches[0], $matches2);
-                    if ($max<$matches2[0]) $max=$matches2[0];
-                }
-            }
-            fclose($fp);
-            // 返回页数
-            return array(true, $max);
-        }
     }
 
     static function calculate($str, $allowedOprs=null){
@@ -201,11 +193,5 @@ class Utils {
             }
         }
         return 0;
-        $typea=typeof($a);
-        $typeb=typeof($b);
-        if($typea=="number"){
-            return "number";
-        }
-
     }
 }
