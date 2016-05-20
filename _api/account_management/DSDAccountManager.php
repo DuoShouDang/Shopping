@@ -25,7 +25,7 @@ class DSDAccountManager {
             "regtime"=>time(),
             "password"=>$password,
             "salt"=>$salt
-        ), "user_id");
+        ));
         return DSDDatabaseConnector::getInsertId();
     }
     static function checkAccount($email, $password, $type=null){
@@ -48,7 +48,7 @@ class DSDAccountManager {
     static function issueAccessTokenWithID($uid, $time=3600){
         $token=Utils::createRandom(32);
         $tokentime=time()+$time;
-        DSDDatabaseConnector::insert("authorization", array("token"=>$token, "user_id"=>$uid, "tokentime"=>$tokentime, "type"=>CMDatabaseConnector::get_first_match("select type from users WHERE user_id=:uid", array(":uid"=>$uid), "type")));
+        DSDDatabaseConnector::insert("authorization", array("token"=>$token, "user_id"=>$uid, "tokentime"=>$tokentime, "type"=>DSDDatabaseConnector::get_first_match("select type from users WHERE user_id=:uid", array(":uid"=>$uid), "type")));
         return $token;
     }
     static function invalidateAccessToken($token){
