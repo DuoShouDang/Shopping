@@ -12,33 +12,27 @@
 
   function authInterceptor($q, $injector) {
     var service = {
-      responseError: responseError,
-      request: request
+      responseError: responseError
     };
 
     return service;
 
     // http response 错误时处理
-    // todo: 测试
+    // todo: 测试文件
     function responseError(rejection) {
-      if (!rejection.config.ignoreAuthModule) {
-        switch (rejection.status) {
-          case 401:
-            // todo: 删除浏览器中user的数据
-            $injector.get('$state').transitionTo('authentication.signin');
-            break;
-          case 403:
-            // todo: forbidden页面
-            $injector.get('$state').transitionTo('forbidden');
-            break;
-        }
+      switch (rejection.status) {
+        case 401:
+          // todo: 删除浏览器中user的数据
+          $injector.get('$state').transitionTo('authentication.signin');
+          break;
+        case 403:
+          // todo: forbidden页面
+          // $injector.get('$state').transitionTo('forbidden');
+          break;
       }
       // 否则执行默认
       return $q.reject(rejection);
     }
 
-    function request(config) {
-      alert(123123123);
-    }
   }
 }());
