@@ -11,7 +11,7 @@ require_once "../account_management/DSDAccountManager.php";
 
 class DSDRequestAccountHandler{
     public static function register(){
-        Utils::ensureKeys($GLOBALS, ["username", "email", "password"]);
+        Utils::ensureKeys($GLOBALS["data"], ["username", "email", "password"]);
         if(!$uid=DSDAccountManager::addAccount($GLOBALS["data"]["username"], $GLOBALS["data"]["email"], DSDAccountManager::USER, $GLOBALS["data"]["password"])){
             DSDRequestResponder::respond(false, "email已经被注册过了");
         }
