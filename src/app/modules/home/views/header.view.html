@@ -20,5 +20,19 @@
         <a ng-switch-default ui-sref="{{item.state}}" ng-bind="item.title"></a>
       </li>
     </ul>
+    <ul class="nav navbar-nav navbar-right" ng-hide="vm.authentication">
+      <li ui-sref-active="active">
+        <a ui-sref="authentication.signup">Sign Up</a>
+      </li>
+      <li class="divider-vertical"></li>
+      <li ui-sref-active="active">
+        <a ui-sref="authentication.signin">Sign In</a>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right" ng-show="vm.authentication">
+      <li ui-sref-active="active">
+        <a ui-sref="authentication.logout">Log out</a>
+      </li>
+    </ul>
   </nav>
 </div>

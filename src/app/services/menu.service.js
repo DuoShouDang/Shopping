@@ -5,7 +5,7 @@
   'use strict';
 
   angular
-    .module('app.core')
+    .module('app')
     .factory('menuService', menuService);
 
   function menuService() {

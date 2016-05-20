@@ -4,17 +4,22 @@
 (function () {
   'use strict';
 
-  angular.module('app.about').config(HomeRoute);
+  angular
+    .module('app.about')
+    .config(AboutRoute);
 
-  HomeRoute.$inject = ['$stateProvider', '$urlRouterProvider'];
+  AboutRoute.$inject = ['$stateProvider', '$urlRouterProvider'];
 
-  function HomeRoute($stateProvider, $urlRouterProvider) {
+  function AboutRoute($stateProvider, $urlRouterProvider) {
     $stateProvider
       .state('about', {
         controller: 'AboutController',
         controllerAs: 'vm',
         templateUrl: 'app/modules/about/views/about.view.html',
-        url: '/about'
+        url: '/about',
+        data: {
+          pageTitle: 'About us'
+        }
       });
   }
 })();
