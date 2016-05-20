@@ -65,9 +65,4 @@ class DSDAccountManager {
     static function clearAllAccessTokenForUid($uid){
         return DSDDatabaseConnector::write("delete from authorization WHERE user_id=:uid and tokentime<:time", array(":uid"=>$uid, ":time"=>time()));
     }
-    static function addSecretaryAccount($username, $email, $password){
-        $id=DSDAccountManager::addAccount($username, $email, CMAccountManager::SECRETARY);
-        DSDAccountManager::activateAccountWithPasswordAndUid($password, $id);
-        return true;
-    }
 }

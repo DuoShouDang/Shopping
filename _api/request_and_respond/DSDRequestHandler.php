@@ -27,6 +27,10 @@ class DSDRequestHandler{
         $first_action=strtolower($first_action);
         $first_action[0]=strtoupper($first_action[0]);
         try{
+            $data=file_get_contents("php://input");
+            if($data) $GLOBALS["data"]=json_decode($data, true);
+            else $GLOBALS["data"]=[];
+
             $classname="DSDRequest".$first_action."Handler";
             $classFilePath="../request_and_respond/".$classname.".php";
             if(!file_exists($classFilePath)){
