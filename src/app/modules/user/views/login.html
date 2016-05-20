@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../../../../assets/stylesheets/login.css" charset="utf-8">
+    <script type="text/javascript" src="../services/login.service.js"></script>
+    <title>剁手党</title>
+</head>
+
+<body>
+    <div id="header">
+        <a id="logo" href="www.duoshou.com"></a>
+        <a id="user" class="text-button" href="#login-area">登录/注册</a>
+        <a class="text-button" href="www.duoshou.com">随便逛逛</a>
+        <a id="mobile-app" class="text-button" href="app.duoshou.com">APP下载</a>
+    </div>
+
+    <div id="banner" onclick="unshowAll()">
+        <div id="banner-img1" class="banner-img"></div>
+        <div id="slogan">duoshou网，自由的购物平台</div>
+        <div id="banner-img2" class="banner-img"></div>
+    </div>
+
+    <div id="login-area">
+        <form id="login" class="form" onsubmit="return checkLoginForm()">
+            <p style="position: absolute; top: -52px; left: 5%; color: white; font-size: 20px;">登 录</p>
+            <span>账号：</span><input type="text" id="username" name="username" placeholder=" 用户名/邮箱"></input><br/>
+            <span>密码：</span><input type="password" id="input-password" placeholder=" 密码"></input><br/>
+            <input type="hidden" id="md5-password" name="password"></input>
+            <button type="submit">登 录</button>
+        </form>
+        <form id="signin" class="form" onsubmit="return checkSigninForm()">
+            <p style="position: absolute; top: -52px; left: 5%; color: white; font-size: 20px; ">注 册</p>
+            <span>邮箱：</span><input type="text" id="signin-email" name="signin-email" placeholder=" 请输入注册邮箱"></input><br/>
+            <span>密码：</span><input type="password" id="signin-password1" placeholder=" 请设置密码"></input><br/>
+            <span>密码：</span><input type="password" id="signin-password2" placeholder=" 请再次确认密码"></input><br/>
+            <span>账户：</span><input type="text" id="signin-username" name="signin-username" placeholder=" 请设置用户名"></input><br/>
+            <input type="hidden" id="signin-md5-password" name="password"></input>
+            <button type="submit">注 册</button >
+        </form>
+        <span class="text-button login-button" onMouseOver="showLogin()" onclick="unshowAll()">登 录</span>
+        <span class="text-button login-button" onMouseOver="showSignin()" onclick="unshowAll()">注 册</span>
+    </div>
+
+    <div id="footer">
+        <hr width="70%" />
+        <div class="footer-link">
+            <a href="/about/us" title="关于我们">关于我们</a>
+            <a href="/about/contact" title="联系我们">联系我们</a>
+            <a href="/user/feedback" title="意见反馈">意见反馈</a>
+        </div>
+        <div class="footer-sns">
+            <span>分享到：</span>
+            <a href="http://weibo.com/" class="footer-sns-weibo hide-text"  title="新浪微博">新浪微博</a>
+            <a href="qq.weixin.com" class="footer-sns-weixin"  title="微信">微信</a>
+            <a href="http://qq.com/" class="footer-sns-qqweibo hide-text"  title="腾讯微博">腾讯微博</a>
+            <a href="http://qzone.qq.com/" class="footer-sns-qzone hide-text"  title="QQ空间">QQ空间</a>
+        </div>
+        <div class="friendly-link">
+            <span>友情链接：</span>
+            <a href="http://www.hao123.com" title="hao123">hao123</a>
+            <a href="http://www.w3school.com.cn" title="w3shool">w3shool</a>
+            <a href="http://www.admin10000.com/" title="web开发者">web开发者</a>
+            <a href="/about/friendly" title="友情链接">更多...</a>
+        </div>
+        <div class="footer-copyright">
+            <p>Copyright © 2016 duoshou.com All Rights Reserved | 京ICP备 00000000号-0</p>
+        </div>
+    </div>
+</body>
+</html>
