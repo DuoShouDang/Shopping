@@ -12,22 +12,21 @@ class DSDAccountManager {
     const USER="user";
     const ADMIN="admin";
 
-    static function addAccount($username, $email, $type){
-        $res=DSDDatabaseConnector::get_first_match("select valid,user_id from users where email=:email", array(":email"=>$email));
-        if($res&&$res["valid"]==1){
+    static function addAccount($username, $email, $type, $password){
+        if(DSDDatabaseConnector::exists("select user_id from users where email=:email", array(":email"=>$email))){
             return false;
         }
-        return DSDDatabaseConnector::insertOrUpdate("users", array("valid"=>0, "username"=>$username, "email"=>$email, "type"=>$type, "regtime"=>time()), "user_id");
-    }
-    static function activateAccountWithPassword($password, $token){
         $salt=Utils::createRandom(6);
         $password=md5($password.$salt);
-        return DSDDatabaseConnector::update("users", array("password"=>$password, "salt"=>$salt, "valid"=>1, "activatetime"=>time()), "register_token=:token", array(":token"=>$token));
-    }
-    static function activateAccountWithPasswordAndUid($password, $uid){
-        $salt=Utils::createRandom(6);
-        $password=md5($password.$salt);
-        return DSDDatabaseConnector::update("users", array("password"=>$password, "salt"=>$salt, "valid"=>1, "activatetime"=>time()), "user_id=:uid", array(":uid"=>$uid));
+        DSDDatabaseConnector::insert("users", array(
+            "username"=>$username,
+            "email"=>$email,
+            "type"=>$type,
+            "regtime"=>time(),
+            "password"=>$password,
+            "salt"=>$salt
+        ), "user_id");
+        return DSDDatabaseConnector::getInsertId();
     }
     static function checkAccount($email, $password, $type=null){
         $info=DSDDatabaseConnector::get_first_match("select password,salt,type from users where email=:email limit 1", array(":email"=>$email));
@@ -50,10 +49,6 @@ class DSDAccountManager {
         $token=Utils::createRandom(32);
         $tokentime=time()+$time;
         DSDDatabaseConnector::insert("authorization", array("token"=>$token, "user_id"=>$uid, "tokentime"=>$tokentime, "type"=>CMDatabaseConnector::get_first_match("select type from users WHERE user_id=:uid", array(":uid"=>$uid), "type")));
-//        $time=time();
-//        $time=$time+1800;
-//        $date=date("D, d M Y H:i:s",$time)." GMT";
-//        header('Set-cookie: access_token='.$token.'; expires='.$date.'; path=/'."\n",false);
         return $token;
     }
     static function invalidateAccessToken($token){
