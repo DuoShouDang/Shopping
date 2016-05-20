@@ -11,12 +11,10 @@ require_once "../account_management/DSDAccountManager.php";
 
 class DSDRequestAccountHandler{
     public static function register(){
-        $uid=DSDAccountManager::addAccount($GLOBALS["data"]["username"], $GLOBALS["data"]["email"], DSDAccountManager::USER);
-        if(!$uid){
+        Utils::ensureKeys($GLOBALS, ["username", "email", "password"]);
+        if(!$uid=DSDAccountManager::addAccount($GLOBALS["data"]["username"], $GLOBALS["data"]["email"], DSDAccountManager::USER, $GLOBALS["data"]["password"])){
             DSDRequestResponder::respond(false, "email已经被注册过了");
         }
-        if(DSDAccountManager::activateAccountWithPasswordAndUid($GLOBALS["data"]["password"], $uid)){
-            DSDRequestResponder::respond(true, null, DSDAccountManager::issueAccessTokenWithID($uid));
-        }
+        DSDRequestResponder::respond(true, null, DSDAccountManager::issueAccessTokenWithID($uid));
     }
 }

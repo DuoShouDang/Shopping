@@ -8,8 +8,8 @@
 $GLOBALS['debug']=true;
 
 $GLOBALS['db_host']='localhost';
-$GLOBALS['db_username']='duoshoudang';
-$GLOBALS['db_password']='duoshoudang20160511';
+$GLOBALS['db_username']='root';
+$GLOBALS['db_password']='!QAZ2wsx';
 $GLOBALS['db_database']='duoshoudang';
 $GLOBALS['db_port']=3306;
 
