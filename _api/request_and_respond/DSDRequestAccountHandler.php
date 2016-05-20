@@ -17,4 +17,21 @@ class DSDRequestAccountHandler{
         }
         DSDRequestResponder::respond(true, null, DSDAccountManager::issueAccessTokenWithID($uid));
     }
+    public static function login(){
+        self::loginWithType(DSDAccountManager::USER);
+    }
+    public static function logout(){
+        DSDAccountManager::invalidateAccessToken(DSDAuthorizationChecker::getCurrentToken());
+    }
+    private static function loginWithType($type){
+        $res=DSDAccountManager::checkAccount($GLOBALS["data"]["email"], $GLOBALS["data"]["password"], $type);
+        if($res["success"]){
+            DSDRequestResponder::respond(true, null, array(
+                "token"=>DSDAccountManager::issueAccessTokenWithID(DSDAccountManager::uidForEmail($GLOBALS["data"]["email"])),
+                "type"=>DSDAccountManager::USER
+            ));
+        }else{
+            DSDRequestResponder::respond(false, $res["errorInfo"]);
+        }
+    }
 }
