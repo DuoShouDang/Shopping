@@ -7,6 +7,7 @@
  * Time: 上午12:44
  */
 require_once "../request_and_respond/DSDRequestResponder.php";
+require_once "../account_management/DSDAccountManager.php";
 
 class DSDRequestAccountHandler{
     public static function register(){
