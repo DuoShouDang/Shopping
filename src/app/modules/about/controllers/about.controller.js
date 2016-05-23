@@ -10,7 +10,7 @@
 
   function AboutController() {
     var vm = this;
-    vm.content = 'Can you see this?';
+    vm.content = 'asdasdasd?';
     vm.alert = customAlert;
 
     function customAlert() {
