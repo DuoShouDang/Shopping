@@ -8,20 +8,33 @@
     .module('app.home')
     .controller('HeaderController', HeaderController);
 
-  HeaderController.$inject = ['$scope', '$state', 'menuService'];
+  HeaderController.$inject = ['$scope', '$state', '$http', 'menuService', 'Authentication'];
 
-  function HeaderController($scope, $state, menuService) {
+  function HeaderController($scope, $state, $http, menuService, Authentication) {
     var vm = this;
 
     vm.isCollapsed = true;
     vm.menu = menuService.getMenu('topbar');
-    vm.authentication = false;
+    vm.authentication = Authentication.get();
+    vm.logout = logout;
 
     $scope.$on('$stateChangeSuccess', stateChangeSuccess);
 
     function stateChangeSuccess() {
       // Collapsing the menu after navigation
       vm.isCollapsed = false;
+      vm.authentication = Authentication.get();
+    }
+
+    function logout() {
+      $http.post('/api/account/logout', vm.authentication).success(function (response) {
+        if (response.success) {
+          vm.authentication.del();
+        }
+        $state.go($state.current.state.name);
+      }).error(function (response) {
+        vm.error = response;
+      });
     }
   }
 }());

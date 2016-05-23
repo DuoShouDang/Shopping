@@ -86,7 +86,7 @@ gulp.task('js:style', function () {
   .pipe(plugins.jscs());
 });
 
-gulp.task('js', ['js:style', 'js:lint', 'js:deps'], function () {
+gulp.task('js', ['js:style', 'js:deps'], function () {
   return gulp.src(getPath('app', config.js.files))
   .pipe(plugins.angularFilesort())
   .pipe(plugins.concat(config.js.bundle))

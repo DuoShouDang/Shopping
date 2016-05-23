@@ -12,6 +12,7 @@
     vm.authentication = Authentication;
     vm.signup = signup;
     vm.signin = signin;
+    vm.logout = logout;
 
     vm.error = $location.search().err;
 
@@ -30,12 +31,13 @@
       }
 
       vm.credentials.password = md5.createHash(vm.credentials.password);
-      $http.post('/api/account/login', vm.credentials).success(function (response) {
+      $http.post('/api/account/register', vm.credentials).success(function (response) {
         if (response.success) {
           vm.authentication.put({
             email : vm.credentials.email,
             username: vm.credentials.username,
-            token: response.successInfo
+            token: response.successInfo,
+            type: 'user'
           });
           $state.go($state.previous.state.name || 'home', $state.previous.params);
         } else {
@@ -56,12 +58,13 @@
       }
 
       vm.credentials.password = md5.createHash(vm.credentials.password);
-      $http.post('/api/account/register', vm.credentials).success(function (response) {
+      $http.post('/api/account/login', vm.credentials).success(function (response) {
         if (response.success) {
           vm.authentication.put({
             email : vm.credentials.email,
             username: vm.credentials.username,
-            token: response.successInfo
+            token: response.successInfo.token,
+            type: response.successInfo.type
           });
           $state.go($state.previous.state.name || 'home', $state.previous.params);
         } else {
