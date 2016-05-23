@@ -12,7 +12,6 @@
     vm.authentication = Authentication;
     vm.signup = signup;
     vm.signin = signin;
-    vm.logout = logout;
 
     vm.error = $location.search().err;
 
