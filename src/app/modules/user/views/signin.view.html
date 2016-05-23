@@ -4,15 +4,16 @@
     <form name="vm.userForm" ng-submit="vm.signin(vm.userForm.$valid)" class="signin" novalidate autocomplete="off">
       <fieldset>
         <div class="form-group" show-errors>
-          <label for="username">用户名</label>
-          <input type="text" id="username" name="username" class="form-control" ng-model="vm.credentials.username" placeholder="用户名" lowercase required>
-          <div ng-messages="vm.userForm.username.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">请填写用户名</p>
+          <label for="email">邮箱</label>
+          <input type="email" id="email" name="email" class="form-control" ng-model="vm.credentials.email" placeholder="邮箱" lowercase required />
+          <div ng-messages="vm.userForm.email.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">请填写邮箱</p>
+            <p class="help-block error-text" ng-message="email">邮箱格式不正确!</p>
           </div>
         </div>
         <div class="form-group" show-errors>
           <label for="password">密码</label>
-          <input type="password" id="password" name="password" class="form-control" ng-model="vm.credentials.password" placeholder="密码" required>
+          <input type="password" id="password" name="password" class="form-control" ng-model="vm.credentials.password" placeholder="密码" required />
           <div ng-messages="vm.userForm.password.$error" role="alert">
             <p class="help-block error-text" ng-message="required">请填写密码</p>
           </div>
