@@ -1,11 +1,13 @@
 .error-text {
   display: none;
 }
-.has-error .help-block.error-text {
-  display: block;
-}
-.has-error .help-inline.error-text {
-  display: inline;
+.has-error {
+  .help-block.error-text {
+    display: block;
+  }
+  .help-inline.error-text {
+    display: inline;
+  }
 }
 form:not(.ng-submitted) .ng-untouched + div[role=alert] > .error-text {
   display: none;

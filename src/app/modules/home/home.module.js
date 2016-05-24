@@ -1,5 +1,5 @@
 (function () {
   'use strict';
 
-  angular.module('app.home', ['app.core', 'app.user', 'app.about']);
+  angular.module('app.home', ['app.core', 'app.user', 'app.about', 'app.user']);
 })();

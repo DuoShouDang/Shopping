@@ -1,21 +1,21 @@
 /**
- * Created by Jasmine on 5/13/16.
+ * Created by Jasmine on 5/23/16.
  */
 (function () {
   'use strict';
 
   angular
-    .module('app.about')
+    .module('app.items')
     .run(menuConfig);
 
   menuConfig.$inject = ['menuService'];
 
   function menuConfig(menuService) {
     menuService.addMenuItem('topbar', {
-      title: 'About Us',
-      state: 'about',
-      roles: ['*'],
-      position: 100
+      title: 'Items',
+      state: 'items.list',
+      position: 0
     });
+
   }
 }());

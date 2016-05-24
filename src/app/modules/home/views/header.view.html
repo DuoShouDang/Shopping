@@ -31,7 +31,7 @@
     </ul>
     <ul class="nav navbar-nav navbar-right" ng-show="vm.authentication">
       <li ui-sref-active="active">
-        <a ui-sref="authentication.logout">Log out</a>
+        <a ng-click="vm.logout()">Log out</a>
       </li>
     </ul>
   </nav>
