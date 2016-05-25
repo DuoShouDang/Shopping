@@ -1,5 +1,6 @@
-CREATE DATABASE duoshoudang CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-CREATE TABLE duoshoudang.users
+CREATE DATABASE IF NOT EXISTS duoshoudang CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+
+CREATE TABLE IF NOT EXISTS duoshoudang.users
 (
     user_id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
     username VARCHAR(30) NOT NULL,
@@ -7,14 +8,26 @@ CREATE TABLE duoshoudang.users
     password VARCHAR(50) NOT NULL,
     salt VARCHAR(6) NOT NULL,
     type VARCHAR(12) NOT NULL,
-    regtime INT(11)
+    regtime INT(11),
+    INDEX ('email')
 );
-CREATE UNIQUE INDEX email ON duoshoudang.users (email);
 
-CREATE TABLE duoshoudang.authorization
+CREATE TABLE IF NOT EXISTS duoshoudang.authorization
 (
     token VARCHAR(32) PRIMARY KEY NOT NULL,
     user_id INT(11) NOT NULL,
     tokentime INT(11) NOT NULL,
     type VARCHAR(10) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS duoshoudang.goods
+(
+    gid INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    name VARCHAR(32) NOT NULL,
+    image_token VARCHAR(32) NOT NULL,
+    abstract TEXT NOT NULL,
+    description LONGTEXT NOT NULL,
+    price INT(11) NOT NULL,
+    remains INT(11) NOT NULL,
+    timestamp INT(11)
 );
