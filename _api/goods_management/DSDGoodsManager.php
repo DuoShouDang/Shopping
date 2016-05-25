@@ -9,15 +9,15 @@ require_once "../data_management/DSDDatabaseConnector.php";
 require_once "../utils/Utils.php";
 
 class DSDGoodsManager {
-    static function view_all_goods($page) {
+    static function view_all_goods($page, $num_per_page) {
         $total_page = null;
-        $result = DSDDatabaseConnector::read("select * from goods", null, "timestamp", false, $page, 12, $total_page);
+        $result = DSDDatabaseConnector::read("select * from goods", null, "timestamp", false, $page, $num_per_page, $total_page);
         return self::return_simplify_result($result, $total_page);
     }
 
-    static function view_goods_by_category($cid, $page) {
+    static function view_goods_by_category($cid, $page, $num_per_page) {
         $total_page = null;
-        $result = DSDDatabaseConnector::read("select * from goods WHERE cid=:cid", array(":cid" => $cid), "timestamp", false, $page, 12, $total_page);
+        $result = DSDDatabaseConnector::read("select * from goods WHERE cid=:cid", array(":cid" => $cid), "timestamp", false, $page, $num_per_page, $total_page);
         return self::return_simplify_result($result, $total_page);
     }
     
@@ -25,9 +25,9 @@ class DSDGoodsManager {
         return DSDDatabaseConnector::exists("select * from category where cid=:cid", array(":cid"=>$cid));
     }
 
-    static function search_goods($keyword, $page) {
+    static function search_goods($keyword, $page, $num_per_page) {
         $total_page = null;
-        $result = DSDDatabaseConnector::read("select * from goods WHERE CONCAT_WS(' ', name, description) LIKE :keyword", array(":keyword" => "%".$keyword."%"), "timestamp", false, $page, 12, $total_page);
+        $result = DSDDatabaseConnector::read("select * from goods WHERE CONCAT_WS(' ', name, description) LIKE :keyword", array(":keyword" => "%".$keyword."%"), "timestamp", false, $page, $num_per_page, $total_page);
         return self::return_simplify_result($result, $total_page);
     }
 
