@@ -21,8 +21,8 @@ class DSDGoodsManager {
         return DSDGoodsManager::return_simplify_result($result, $total_page);
     }
     
-    static function check_cid($cid) {
-        return (DSDDatabaseConnector::get_first_match("select * from category where cid=:cid", array(":cid"=>$cid)) != null);
+    static function check_category($cid) {
+        return DSDDatabaseConnector::exists("select * from category where cid=:cid", array(":cid"=>$cid));
     }
 
     static function search_goods($keyword, $page) {
@@ -32,9 +32,13 @@ class DSDGoodsManager {
     }
 
     static function view_certain_goods($gid) {
-        $result = DSDDatabaseConnector::read("select * from goods WHERE gid=:gid", array(":gid" => $gid));
-        unset($result[0]["abstract"]);
+        $result = DSDDatabaseConnector::get_first_match("select * from goods WHERE gid=:gid", array(":gid" => $gid));
+        unset($result["abstract"]);
         return $result;
+    }
+
+    static function check_goods($gid) {
+        return DSDDatabaseConnector::exists("select * from goods where gid=:gid", array(":gid"=>$gid));
     }
     
     static function return_simplify_result($result, $total_page) {
