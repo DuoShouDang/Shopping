@@ -11,11 +11,6 @@ require_once "../request_and_respond/DSDRequestResponder.php";
 require_once "../account_management/DSDAccountManager.php";
 
 class DSDAuthorizationChecker {
-    const COMPANY="company";
-    const LAWYER="lawyer";
-    const INDIVIDUAL="individual";
-    const SUB="sub";
-    const SECRETARY="secretary";
 
     const LOGGEDIN="loggedin";
     static $tempUid=null;

@@ -21,9 +21,10 @@ class DSDRequestAccountHandler{
         self::loginWithType(DSDAccountManager::USER);
     }
     public static function logout(){
-        DSDAccountManager::invalidateAccessToken(DSDAuthorizationChecker::getCurrentToken());
+        $res = DSDAccountManager::invalidateAccessToken(DSDAuthorizationChecker::getCurrentToken());
+        DSDRequestResponder::respond($res);
     }
-    private static function loginWithType($type){
+    public static function loginWithType($type){
         $res=DSDAccountManager::checkAccount($GLOBALS["data"]["email"], $GLOBALS["data"]["password"], $type);
         if($res["success"]){
             DSDRequestResponder::respond(true, null, array(
