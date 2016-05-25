@@ -33,7 +33,7 @@ class DSDRequestAccountHandler{
                 "type"=>$type
             ));
         }else{
-            DSDRequestResponder::respond(false, $res["errorInfo"]);
+            DSDRequestResponder::respond(false, $res["msg"]);
         }
     }
 }
