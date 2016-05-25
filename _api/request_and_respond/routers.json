@@ -2,5 +2,7 @@
   "goods/:gid":"goods/detail",
   "goods/all/:page":"goods/all",
   "goods/category/:cid/:page":"goods/category",
-  "goods/search/:keyword/:page":"goods/search"
+  "goods/search/:keyword/:page":"goods/search",
+
+  "shoppingcart/:gid/:sid":"goods/modify"
 }
