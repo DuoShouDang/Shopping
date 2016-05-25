@@ -1,6 +1,5 @@
-<<<<<<< HEAD
-.idea/*
-=======
+_api/config/
+
 # OS
 # ===========
 .DS_Store
@@ -63,5 +62,4 @@ local.properties
 
 # Back end
 # ========
-
->>>>>>> DuoShouDang/master
+phpmyadmin/

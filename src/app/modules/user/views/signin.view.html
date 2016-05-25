@@ -1,0 +1,32 @@
+<div>
+  <h3 class="col-md-12 text-center">登陆</h3>
+  <div class="col-xs-offset-2 col-xs-8 col-md-offset-4 col-md-4">
+    <form name="vm.userForm" ng-submit="vm.signin(vm.userForm.$valid)" class="signin" novalidate autocomplete="off">
+      <fieldset>
+        <div class="form-group" show-errors>
+          <label for="email">邮箱</label>
+          <input type="email" id="email" name="email" class="form-control" ng-model="vm.credentials.email" placeholder="邮箱" lowercase required />
+          <div ng-messages="vm.userForm.email.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">请填写邮箱</p>
+            <p class="help-block error-text" ng-message="email">邮箱格式不正确!</p>
+          </div>
+        </div>
+        <div class="form-group" show-errors>
+          <label for="password">密码</label>
+          <input type="password" id="password" name="password" class="form-control" ng-model="vm.credentials.password" placeholder="密码" required />
+          <div ng-messages="vm.userForm.password.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">请填写密码</p>
+          </div>
+        </div>
+        <div class="text-center form-group">
+          <button type="submit">登陆</button>
+          &nbsp; 或&nbsp;
+          <a ui-sref="authentication.signup">注册一个新账号</a>
+        </div>
+        <uib-alert type="danger" ng-show="vm.error" class="text-center text-danger">
+          <span ng-bind="vm.error"></span>
+        </uib-alert>
+      </fieldset>
+    </form>
+  </div>
+</div>
