@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS duoshoudang.authorization
 
 CREATE TABLE IF NOT EXISTS duoshoudang.goods
 (
-    gid INT(11) PRIMARY KEY NOT NULL,
+    gid INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
     name VARCHAR(32) NOT NULL,
     image_token VARCHAR(32) NOT NULL,
     abstract TEXT NOT NULL,
