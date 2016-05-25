@@ -11,24 +11,21 @@ require_once "../goods_management/DSDGoodsManager.php";
 
 class DSDRequestGoodsHandler{
     
-    public static function all() {
-        Utils::ensureKeys(@$_GET, ["page"]);
-        $info = DSDGoodsManager::view_all_goods(@$_GET["page"]);
+    public static function all($page) {
+        $info = DSDGoodsManager::view_all_goods($page);
         DSDRequestResponder::respond(true, null, $info);
     }
 
-    public static function category() {
-        Utils::ensureKeys(@$_GET, ["page", "cid"]);
-        if (!DSDGoodsManager::check_cid(@$_GET["cid"])) {
+    public static function category($cid, $page) {
+        if (!DSDGoodsManager::check_cid($cid)) {
             DSDRequestResponder::respond(false, "类别不存在", null);
         }
-        $info = DSDGoodsManager::view_goods_by_category(@$_GET["cid"], @$_GET["page"]);
+        $info = DSDGoodsManager::view_goods_by_category($cid, $page);
         DSDRequestResponder::respond(true, null, $info);
     }
 
-    public static function search() {
-        Utils::ensureKeys(@$_GET, ["page", "keyword"]);
-        $info = DSDGoodsManager::search_goods(@$_GET["keyword"], @$_GET["page"]);
+    public static function search($keyword, $page) {
+        $info = DSDGoodsManager::search_goods($keyword, $page);
         DSDRequestResponder::respond(true, null, $info);
     }
 
