@@ -18,6 +18,7 @@ class DSDRequestGoodsHandler{
 
     public static function category($cid, $page) {
         if (!DSDGoodsManager::check_category($cid)) {
+            DSDRequestResponder::http_code(404, false);
             DSDRequestResponder::respond(false, "类别不存在", null);
         }
         $info = DSDGoodsManager::view_goods_by_category($cid, $page);
@@ -31,6 +32,7 @@ class DSDRequestGoodsHandler{
 
     public static function detail($gid) {
         if (!DSDGoodsManager::check_goods($gid)) {
+            DSDRequestResponder::http_code(404, false);
             DSDRequestResponder::respond(false, "商品不存在", null);
         }
         $info = DSDGoodsManager::view_certain_goods($gid);
