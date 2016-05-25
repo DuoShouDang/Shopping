@@ -39,3 +39,11 @@ CREATE TABLE IF NOT EXISTS duoshoudang.category
     cid INT(6) PRIMARY KEY NOT NULL AUTO_INCREMENT,
     name VARCHAR(32) NOT NULL
 );
+
+CREATE TABLE duoshoudang.shopping_cart
+(
+    user_id INT NOT NULL,
+    good_id INT NOT NULL,
+    number INT,
+    CONSTRAINT shopping_cart_user_id_good_id_pk PRIMARY KEY (user_id, good_id)
+);
