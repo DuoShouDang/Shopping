@@ -20,7 +20,7 @@ class DSDRequestGoodsHandler{
     public static function category() {
         Utils::ensureKeys(@$_GET, ["page", "cid"]);
         if (!DSDGoodsManager::check_cid(@$_GET["cid"])) {
-            DSDRequestResponder::respond(false, "类别不存在", nil);
+            DSDRequestResponder::respond(false, "类别不存在", null);
         }
         $info = DSDGoodsManager::view_goods_by_category(@$_GET["cid"], @$_GET["page"]);
         DSDRequestResponder::respond(true, null, $info);
