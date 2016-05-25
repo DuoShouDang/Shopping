@@ -4,5 +4,6 @@
 (function () {
   'use strict';
 
-  angular.module('app.user', ['app.core']);
+  angular.module('app.user', ['app.core', 'ngCookies', 'angular-md5']);
+
 })();

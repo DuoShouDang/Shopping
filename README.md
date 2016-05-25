@@ -15,6 +15,12 @@ $ npm install -g bower
 $ npm install -g karma
 ```
 
+* Lessc - used for compiling Less files
+
+```
+$ npm install -g less
+```
+
 ## 安装
 
 Clone this repository.
