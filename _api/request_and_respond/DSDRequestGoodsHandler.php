@@ -30,6 +30,7 @@ class DSDRequestGoodsHandler{
     }
 
     public static function detail($gid) {
+        var_dump($gid);
         $info = DSDGoodsManager::view_certain_goods($gid);
         DSDRequestResponder::respond(true, null, $info);
     }
