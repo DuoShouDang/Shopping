@@ -32,7 +32,7 @@ class DSDRequestGoodsHandler{
         DSDRequestResponder::respond(true, null, $info);
     }
 
-    public static function certain() {
+    public static function detail() {
         Utils::ensureKeys(@$_GET, ["gid"]);
         $info = DSDGoodsManager::view_certain_goods(@$_GET["gid"]);
         DSDRequestResponder::respond(true, null, $info);
