@@ -25,10 +25,9 @@ CREATE TABLE IF NOT EXISTS duoshoudang.goods
     gid INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
     name VARCHAR(32) NOT NULL,
     cid INT(6) NOT NULL,
-    image_token VARCHAR(32) NOT NULL,
+    info TEXT NOT NULL,
     abstract TEXT NOT NULL,
     description LONGTEXT NOT NULL,
-    price INT(11) NOT NULL,
     remains INT(11) NOT NULL,
     timestamp INT(11),
     FOREIGN KEY (cid) REFERENCES category(cid)
