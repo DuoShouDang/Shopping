@@ -44,9 +44,6 @@ CREATE TABLE duoshoudang.shopping_cart
     user_id INT NOT NULL,
     good_id INT NOT NULL,
     number INT,
-    CONSTRAINT shopping_cart_user_id_good_id_pk PRIMARY KEY (user_id, good_id)
+    sort_identifier VARCHAR(20) NOT NULL,
+    CONSTRAINT PRIMARY KEY (user_id, good_id, sort_identifier)
 );
-
-ALTER TABLE duoshoudang.shopping_cart ADD sort_identifier VARCHAR(20) NULL;
-ALTER TABLE duoshoudang.shopping_cart DROP PRIMARY KEY;
-ALTER TABLE duoshoudang.shopping_cart ADD PRIMARY KEY (user_id, good_id, sort_identifier);
