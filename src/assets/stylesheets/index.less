@@ -1,12 +1,119 @@
 
+@normalColor: gray;
+@focusColor: white;
+@focusBackgroundColor: salmon;
+@imagePath: "../assets/images/index";
+
 .navbar{
-	height: 100px;
+    margin-top: 0;
+    margin-bottom: 0;
 	background-color: black;
 	.container{
-		margin-top: 20px;
-		.navbar-brand{
-			background-image: url(../../images/index/logo.png);
-		}
-	}
+        .navbar-default{
+            float: left;
+            width: inherit;
+            background: none;
+            background-image: none;
+            border-style: none;
+            margin: 0;
+            .navbar-brand{
+                width: 60px;
+                height: 60px;
+                margin-right: 20px;
+                background-image: url("@{imagePath}/logo.png");
+                background-color: @normalColor;
+                background-size: cover;
+                background-position: 50% 50%;
+                background-repeat: no-repeat;
+                &:hover{
+                    background-color: @focusBackgroundColor;
+                }
+            }
+            .navbar-collapse{
+                .nav > li > a{
+                    color: @normalColor;
+                    padding: 20px 10px;
+                    &:hover{
+                        color: @focusColor;
+                        background-color: @focusBackgroundColor;
+                    }
+                }
+            }
+        }
+    }
 }
 
+#content{
+    margin-top: 60px;
+    padding-top: 40px;
+}
+
+#home{
+    width: 100%;
+    margin-top: -50px;
+    padding-top: 200px;
+    padding-bottom: 200px;
+    padding-left: 100px;
+    padding-right: 100px;
+    background-image: url("@{imagePath}/banner-img1.jpg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    .jumbotron{
+        background-color: rgba(255, 255, 255, 0.5);
+    }
+}
+
+footer{
+    font-size: 14px;
+    color: gray;
+    margin-bottom: 30px;
+    .footer-link{
+        margin-top: 20px;
+        margin-bottom: 20px;
+        a{
+            color: gray;
+            &:hover{
+                color: black;
+            }
+        }
+    }
+    .footer-sns{
+
+        @y-offset: -3px;
+        @focus-y-offset: -44px;
+
+        margin-top: 20px;
+        margin-bottom: 20px;
+        a{
+            display: inline-block;
+            width: 32px;
+            height: 32px;
+            margin: 0 10px;
+            vertical-align: middle;
+            background-image: url("@{imagePath}/sns-icons.png");
+            background-repeat: no-repeat;
+            color: gray;
+            text-align: center;
+            &:hover{
+                background-position-y: @focus-y-offset;
+            }
+        }
+        .footer-sns-weibo{
+            background-position: 0 @y-offset;
+        }
+        .footer-sns-weixin{
+            background-position: -52px @y-offset;
+        }
+        .footer-sns-qqweibo{
+            background-position: -104px @y-offset;
+        }
+        .footer-sns-qzone{
+            background-position: -156px @y-offset;
+        }
+    }
+    .hide-text{
+        text-indent: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+}
