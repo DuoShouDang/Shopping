@@ -32,9 +32,8 @@ class DSDRequestGoodsHandler{
         DSDRequestResponder::respond(true, null, $info);
     }
 
-    public static function detail() {
-        Utils::ensureKeys(@$_GET, ["gid"]);
-        $info = DSDGoodsManager::view_certain_goods(@$_GET["gid"]);
+    public static function detail($gid) {
+        $info = DSDGoodsManager::view_certain_goods($gid);
         DSDRequestResponder::respond(true, null, $info);
     }
 }

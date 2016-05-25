@@ -15,16 +15,36 @@ class DSDRequestHandler{
             DSDRequestResponder::respond(false, "Invalid action: illegal character");
         }
         $action=strtolower($action);
-        $index=strpos($action, "_");
-        if($index!=false) {
-            $first_action = substr($action, 0, $index);
-        }else {
-            $first_action = $action;
+        $comps=explode("_", $action);
+        if(file_exists("../request_and_respond/routers.json")){
+            $paths=json_decode(file_get_contents("../request_and_respond/routers.json"), true);
+        }else{
+            $paths=array();
         }
+        $params=[];
+        foreach($paths as $pattern=>$rout){
+            $pattern_comps=explode("/", $pattern);
+            $params=[];
+            if(count($pattern_comps)==count($comps)){
+                $test=true;
+                for($i=0;$i<count($pattern_comps);$i++){
+                    if($pattern_comps[$i][0]==":"){
+                        $params[]=$comps[$i];
+                    }elseif($pattern_comps[$i]!=$comps[$i]){
+                        $test=false;
+                        break;
+                    }
+                }
+                if($test){
+                    #Matched
+                    $comps=explode("/", $rout);
+                }
+            }
+        }
+        $first_action=array_shift($comps);
         if(strlen($first_action)==0){
             DSDRequestResponder::respond(false, "Invalid action: illegal length");
         }
-        $first_action=strtolower($first_action);
         $first_action[0]=strtoupper($first_action[0]);
         try{
             $data=file_get_contents("php://input");
@@ -38,35 +58,17 @@ class DSDRequestHandler{
             }
             require_once $classFilePath;
             $class = new ReflectionClass($classname);
-
-            if(file_exists("routers.json")){
-                $paths=json_decode(file_get_contents("routers.json"), true);
-            }else{
-                $paths=[];
-            }
-            foreach($paths as $one){
-
-            }
-            $remains=substr($action, $index+1);
-            $functionName="";
-            $shouldCapital=false;
-            for($i=0;$i<strlen($remains);$i++){
-                if($remains[$i]=="_"){
-                    $shouldCapital=true;
-                }else{
-                    if($shouldCapital){
-                        $shouldCapital=false;
-                        $functionName .= strtoupper($remains[$i]);
-                    }else{
-                        $functionName .= $remains[$i];
-                    }
-                }
-            }
+            $functionName=implode("", array_map(function($one){
+                $one[0]=strtoupper($one[0]);
+                return $one;
+            }, $comps));
+            $functionName[0]=strtolower($functionName[0]);
+            if(!$functionName) $functionName="get";
             if(!$class->hasMethod($functionName)){
                 DSDRequestResponder::respond(false, "Undefined function: ".$functionName);
             }
             $handler = $class->getMethod($functionName);
-            $handler->invoke($class);
+            $handler->invoke($class, $params);
         }catch(ReflectionException $e){
             DSDRequestResponder::respond(false, "Invalid action: ".$first_action);
         }
