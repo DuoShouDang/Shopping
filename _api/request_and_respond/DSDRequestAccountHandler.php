@@ -29,7 +29,7 @@ class DSDRequestAccountHandler{
         if($res["success"]){
             DSDRequestResponder::respond(true, null, array(
                 "token"=>DSDAccountManager::issueAccessTokenWithID(DSDAccountManager::uidForEmail($GLOBALS["data"]["email"])),
-                "type"=>DSDAccountManager::USER
+                "type"=>$type
             ));
         }else{
             DSDRequestResponder::respond(false, $res["errorInfo"]);
