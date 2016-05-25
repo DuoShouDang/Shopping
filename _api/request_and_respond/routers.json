@@ -4,5 +4,5 @@
   "goods/category/:cid/:page":"goods/category",
   "goods/search/:keyword/:page":"goods/search",
 
-  "shoppingcart/:gid/:sid":"goods/modify"
+  "shoppingcart/:gid/:sid":"shoppingcart/modify"
 }

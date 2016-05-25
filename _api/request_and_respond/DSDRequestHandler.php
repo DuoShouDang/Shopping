@@ -63,10 +63,11 @@ class DSDRequestHandler{
                 $one[0]=strtoupper($one[0]);
                 return $one;
             }, $comps));
-            $functionName[0]=strtolower($functionName[0]);
             if(!$functionName) $functionName="get";
+            $functionName[0]=strtolower($functionName[0]);
+
             if(!$class->hasMethod($functionName)){
-                DSDRequestResponder::respond(false, "Undefined function: ".$functionName);
+                DSDRequestResponder::respond(false, "Undefined function: ".$classname."::".$functionName);
             }
             $handler = $class->getMethod($functionName);
             $handler->invokeArgs($class, $params);

@@ -9,17 +9,9 @@
 require_once "../request_and_respond/DSDRequestResponder.php";
 require_once "../utils/Utils.php";
 require_once "../data_management/DSDDatabaseConnector.php";
+require_once "../account_management/DSDAuthorizationChecker.php";
 
 class DSDRequestShoppingcartHandler{
-    public static function add(){
-        DSDRequestResponder::respond(
-            DSDDatabaseConnector::insert(
-                "shopping_cart",
-                array_merge(Utils::filter($GLOBALS["data"], ["good_id!", "number!", "sort_identifier!"])), array(
-                "user_id"=>DSDAuthorizationChecker::getCurrentUid()
-            ))
-        );
-    }
     public static function modify($good_id, $sid){
         if($_SERVER["REQUEST_METHOD"]=="PUT"){
             DSDRequestResponder::respond(
@@ -38,9 +30,12 @@ class DSDRequestShoppingcartHandler{
             DSDRequestResponder::respond(
                 DSDDatabaseConnector::insert(
                     "shopping_cart",
-                    array_merge(Utils::filter($GLOBALS["data"], ["good_id!", "number!", "sort_identifier!"])), array(
-                    "user_id"=>DSDAuthorizationChecker::getCurrentUid()
-                ))
+                    array(
+                        "user_id"=>DSDAuthorizationChecker::getCurrentUid(),
+                        "good_id"=>$good_id,
+                        "number"=>@$GLOBALS["data"]["number"]?$GLOBALS["data"]["number"]:1
+                    )
+                )
             );
         }elseif($_SERVER["REQUEST_METHOD"]=="DELETE"){
             DSDRequestResponder::respond(
@@ -51,15 +46,6 @@ class DSDRequestShoppingcartHandler{
                 ))
             );
         }
-    }
-    public static function delete($good_id, $sid){
-        DSDRequestResponder::respond(
-            DSDDatabaseConnector::write("delete from shopping_cart WHERE user_id=:uid AND good_id=:gid AND sort_identifier=:sid", array(
-                ":uid"=>DSDAuthorizationChecker::getCurrentUid(),
-                ":gid"=>$good_id,
-                ":sid"=>$sid
-            ))
-        );
     }
     public static function get(){
         DSDRequestResponder::respond(true, null,
