@@ -38,6 +38,7 @@ class DSDRequestHandler{
                 if($test){
                     #Matched
                     $comps=explode("/", $rout);
+                    break;
                 }
             }
         }
@@ -68,7 +69,7 @@ class DSDRequestHandler{
                 DSDRequestResponder::respond(false, "Undefined function: ".$functionName);
             }
             $handler = $class->getMethod($functionName);
-            $handler->invoke($class, $params);
+            $handler->invokeArgs($class, $params);
         }catch(ReflectionException $e){
             DSDRequestResponder::respond(false, "Invalid action: ".$first_action);
         }
