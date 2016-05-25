@@ -1,3 +1,6 @@
 {
-  "goods/:good-id":"goods/detail"
+  "goods/:good-id":"goods/detail",
+  "goods/all/:page":"goods/all",
+  "goods/category/:cid/:page":"goods/category",
+  "goods/search/:keyword/:page":"goods/search"
 }
