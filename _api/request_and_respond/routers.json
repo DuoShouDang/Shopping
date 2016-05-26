@@ -1,8 +1,11 @@
 {
   "goods/:gid":"goods/detail",
-  "goods/all/:page":"goods/all",
-  "goods/category/:cid/:page":"goods/category",
-  "goods/search/:keyword/:page":"goods/search",
+  "goods/all/:page/:num_per_page":"goods/all",
+  "goods/category/:cid/:page/:num_per_page":"goods/category",
+  "goods/search/:keyword/:page/:num_per_page":"goods/search",
 
-  "shoppingcart/:gid/:sid":"shoppingcart/modify"
+  "shoppingcart/:gid/:sid":"shoppingcart/modify",
+
+  "admin/goods":"admin/modify",
+  "admin/goods/:gid":"admin/modify"
 }

@@ -12,7 +12,7 @@ require_once "../data_management/DSDDatabaseConnector.php";
 require_once "../account_management/DSDAuthorizationChecker.php";
 
 class DSDRequestShoppingcartHandler{
-    public static function modify($good_id, $sid){
+    public static function modify($gid, $sid){
         if($_SERVER["REQUEST_METHOD"]=="PUT"){
             DSDRequestResponder::respond(
                 DSDDatabaseConnector::update(
@@ -21,7 +21,7 @@ class DSDRequestShoppingcartHandler{
                     "user_id=:uid AND good_id=:gid AND sort_identifier=:sid",
                     array(
                         ":uid"=>DSDAuthorizationChecker::getCurrentUid(),
-                        ":gid"=>$good_id,
+                        ":gid"=>$gid,
                         ":sid"=>$sid
                     )
                 )
@@ -32,7 +32,7 @@ class DSDRequestShoppingcartHandler{
                     "shopping_cart",
                     array(
                         "user_id"=>DSDAuthorizationChecker::getCurrentUid(),
-                        "good_id"=>$good_id,
+                        "good_id"=>$gid,
                         "number"=>@$GLOBALS["data"]["number"]?$GLOBALS["data"]["number"]:1
                     )
                 )
@@ -41,7 +41,7 @@ class DSDRequestShoppingcartHandler{
             DSDRequestResponder::respond(
                 DSDDatabaseConnector::write("delete from shopping_cart WHERE user_id=:uid AND good_id=:gid AND sort_identifier=:sid", array(
                     ":uid"=>DSDAuthorizationChecker::getCurrentUid(),
-                    ":gid"=>$good_id,
+                    ":gid"=>$gid,
                     ":sid"=>$sid
                 ))
             );
