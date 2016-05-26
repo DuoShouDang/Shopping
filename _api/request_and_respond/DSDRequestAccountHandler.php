@@ -8,6 +8,7 @@
  */
 require_once "../request_and_respond/DSDRequestResponder.php";
 require_once "../account_management/DSDAccountManager.php";
+require_once "../account_management/DSDAuthorizationChecker.php";
 
 class DSDRequestAccountHandler{
     public static function register(){
@@ -32,7 +33,7 @@ class DSDRequestAccountHandler{
                 "type"=>$type
             ));
         }else{
-            DSDRequestResponder::respond(false, $res["errorInfo"]);
+            DSDRequestResponder::respond(false, $res["msg"]);
         }
     }
 }
