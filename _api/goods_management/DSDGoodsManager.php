@@ -54,4 +54,43 @@ class DSDGoodsManager {
         $json = $goods["info"];
         $goods["info"] = json_decode($json, true);
     }
+
+    static function add_goods($name, $cid, $info, $abstract, $description, $remains) {
+        DSDDatabaseConnector::insert(
+            "goods",
+            array(
+                "name" => $name,
+                "cid" => $cid,
+                "info" => $info,
+                "abstract" => $abstract,
+                "description" => $description,
+                "remains" => intval($remains) > 1 ? intval($remains) : 1,
+                "timestamp" => time()
+            )
+        );
+        return DSDDatabaseConnector::getInsertId();
+    }
+
+    static function update_goods($gid, $name, $cid, $info, $abstract, $description, $remains) {
+        DSDDatabaseConnector::update(
+            "goods",
+            array(
+                "name" => $name,
+                "cid" => $cid,
+                "info" => $info,
+                "abstract" => $abstract,
+                "description" => $description,
+                "remains" => intval($remains) > 1 ? intval($remains) : 1,
+                "timestamp" => time()
+            ),
+            "gid=:gid",
+            array(":gid" => $gid)
+        );
+        return DSDDatabaseConnector::getAffectedRows();
+    }
+
+    static function delete_goods($gid) {
+        DSDDatabaseConnector::write("DELETE FROM goods WHERE gid=:gid", array(":gid" => $gid));
+        return DSDDatabaseConnector::getAffectedRows();
+    }
 }
