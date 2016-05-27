@@ -81,7 +81,6 @@ class DSDGoodsManager {
                 "abstract" => $abstract,
                 "description" => $description,
                 "remains" => intval($remains) > 1 ? intval($remains) : 1,
-                "timestamp" => time()
             ),
             "gid=:gid",
             array(":gid" => $gid)
