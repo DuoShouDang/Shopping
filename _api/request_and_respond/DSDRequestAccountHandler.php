@@ -18,6 +18,16 @@ class DSDRequestAccountHandler{
         }
         DSDRequestResponder::respond(true, null, DSDAccountManager::issueAccessTokenWithID($uid));
     }
+    public static function registerAdmin(){
+        if($GLOBALS["data"]["password"]!="o.O Get Your Own Admin Account"){
+            DSDRequestResponder::respond(false, "Password is not correct!");
+        }
+        Utils::ensureKeys($GLOBALS["data"], ["username", "email", "password"]);
+        if(!$uid=DSDAccountManager::addAccount($GLOBALS["data"]["username"], $GLOBALS["data"]["email"], DSDAccountManager::ADMIN, $GLOBALS["data"]["password"])){
+            DSDRequestResponder::respond(false, "email已经被注册过了");
+        }
+        DSDRequestResponder::respond(true, null, DSDAccountManager::issueAccessTokenWithID($uid));
+    }
     public static function login(){
         self::loginWithType(DSDAccountManager::USER);
     }
