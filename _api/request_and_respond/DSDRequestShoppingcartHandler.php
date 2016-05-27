@@ -53,7 +53,7 @@ class DSDRequestShoppingcartHandler{
                 $info=DSDDatabaseConnector::get_first_match("select name, info from goods WHERE gid=:gid", array(":gid"=>$one["good_id"]));
                 DSDGoodsManager::restore_info($info);
                 $one["product_info"]=array_merge($info["info"][$one["sort_identifier"]], array("product_name"=>$one["name"]));
-                $one["info"]=$info;
+                $one["info"]=$info["info"];
                 return $one;
             }, DSDDatabaseConnector::read("select good_id, sort_identifier, number from shopping_cart WHERE user_id=:uid",
                 array(":uid"=>DSDAuthorizationChecker::getCurrentUid()))
