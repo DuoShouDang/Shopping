@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS duoshoudang.category
     name VARCHAR(32) NOT NULL
 );
 
-CREATE TABLE duoshoudang.shopping_cart
+CREATE TABLE IF NOT EXISTS duoshoudang.shopping_cart
 (
     user_id INT NOT NULL,
     good_id INT NOT NULL,
