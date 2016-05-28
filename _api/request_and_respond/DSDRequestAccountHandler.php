@@ -19,7 +19,7 @@ class DSDRequestAccountHandler{
         DSDRequestResponder::respond(true, null, DSDAccountManager::issueAccessTokenWithID($uid));
     }
     public static function registerAdmin(){
-        if($GLOBALS["data"]["password"]!="o.O Get Your Own Admin Account"){
+        if($GLOBALS["data"]["password"]!=$GLOBALS['admin_password']){
             DSDRequestResponder::respond(false, "Password is not correct!");
         }
         Utils::ensureKeys($GLOBALS["data"], ["username", "email", "password"]);
