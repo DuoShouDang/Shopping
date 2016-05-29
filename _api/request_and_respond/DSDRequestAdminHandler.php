@@ -11,6 +11,13 @@ require_once "../goods_management/DSDGoodsManager.php";
 
 class DSDRequestAdminHandler{
 
+    public static function register(){
+        if($GLOBALS["data"]["password"]!=$GLOBALS['admin_password']){
+            DSDRequestResponder::respond(false, "密码错误!");
+        }
+        DSDRequestAccountHandler::registerAccount(DSDAccountManager::ADMIN);
+    }
+
     public static function login(){
         DSDRequestAccountHandler::loginWithType(DSDAccountManager::ADMIN);
     }
@@ -24,7 +31,7 @@ class DSDRequestAdminHandler{
         DSDAuthorizationChecker::ensureIam(DSDAccountManager::ADMIN);
 
         if ($_SERVER["REQUEST_METHOD"] == "POST" || $_SERVER["REQUEST_METHOD"] == "PUT") {
-            Utils::ensureKeys($GLOBALS["data"], ["name", "cid", "info", "abstract", "description", "remains"]);
+            Utils::ensureKeys($GLOBALS["data"], ["name", "cid", "info", "abstract", "description"]);
             if (!DSDGoodsManager::check_category($GLOBALS["data"]["cid"])) {
                 DSDRequestResponder::http_code(404, false);
                 DSDRequestResponder::respond(false, "类别不存在");
@@ -41,8 +48,7 @@ class DSDRequestAdminHandler{
                 $GLOBALS["data"]["cid"],
                 $GLOBALS["data"]["info"],
                 $GLOBALS["data"]["abstract"],
-                $GLOBALS["data"]["description"],
-                $GLOBALS["data"]["remains"]
+                $GLOBALS["data"]["description"]
             );
             DSDRequestResponder::respond(true, null, array("gid" => $info));
             
@@ -64,8 +70,7 @@ class DSDRequestAdminHandler{
                     $GLOBALS["data"]["cid"],
                     $GLOBALS["data"]["info"],
                     $GLOBALS["data"]["abstract"],
-                    $GLOBALS["data"]["description"],
-                    $GLOBALS["data"]["remains"]
+                    $GLOBALS["data"]["description"]
                 );
             } else if ($_SERVER["REQUEST_METHOD"] == "DELETE") {
                 $info = DSDGoodsManager::delete_goods($gid);

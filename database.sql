@@ -28,7 +28,6 @@ CREATE TABLE IF NOT EXISTS duoshoudang.goods
     info TEXT NOT NULL,
     abstract TEXT NOT NULL,
     description LONGTEXT NOT NULL,
-    remains INT(11) NOT NULL,
     timestamp INT(11),
     FOREIGN KEY (cid) REFERENCES category(cid)
 );
